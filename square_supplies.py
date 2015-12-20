@@ -39,4 +39,8 @@ Output:
 """
 
 def answer(n):
-    #code
+    bought = 0
+    while n > 0:
+        n = n - math.floor(math.sqrt(n))**2
+        bought += 1
+    return bought
