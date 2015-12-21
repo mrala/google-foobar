@@ -45,14 +45,19 @@ Output:
 import fractions
 
 def answer(vertices):
-    # http://mathworld.wolfram.com/PolygonArea.html
-    # http://math.stackexchange.com/questions/628117/how-to-count-lattice-points-on-a-line
-    def on_line(v1, v2):
-        return fractions.gcd(abs(v1[0]-v2[0]), abs(v1[1]-v2[1])) + 1
+    """http://mathworld.wolfram.com/PolygonArea.html"""
+    def on_line(point1, point2):
+        """
+        http://math.stackexchange.com/questions/628117/how-to-count-lattice-points-on-a-line
+        """
+        return fractions.gcd(
+            abs(point1[0]-point2[0]), abs(point1[1]-point2[1])) + 1
     (x1, y1), (x2, y2), (x3, y3) = vertices
-    v1, v2, v3 = vertices
+    vtx1, vtx2, vtx3 = vertices
     area = abs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0
-    bounds = (on_line(v1, v2) + on_line(v1, v3) + on_line(v2, v3) - 3)
+    bounds = (on_line(vtx1, vtx2) +
+              on_line(vtx1, vtx3) +
+              on_line(vtx2, vtx3) - 3)
     # Pick's theorem
     return int(area - bounds / 2.0 + 1)
 
